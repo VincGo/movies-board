@@ -13,8 +13,6 @@ const Home = () => {
             .catch((err) => console.log(err))
     }, [])
 
-
-
     return (
         <div>
             <Title title={"Affichage de tous les films"}/>
