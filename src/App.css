@@ -3,6 +3,9 @@
 @import "components/Card/card.css";
 @import "views/Home/home.css";
 @import "views/Movie/movie.css";
+@import "components/Form/form.css";
+
+
 main {
     max-width: 1000px;
     margin: auto;

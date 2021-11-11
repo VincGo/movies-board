@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import produce from "immer";
+import { IoIosAddCircle } from "react-icons/io";
+
 
 const ActorsForm = ({actorsData}) => {
     const [actors, setActors] = useState([{
@@ -47,7 +49,7 @@ const ActorsForm = ({actorsData}) => {
                     }}/>
                 </div>
             )}
-            <button onClick={newActor}>Add</button>
+            <IoIosAddCircle onClick={newActor}/>
         </div>
     );
 };

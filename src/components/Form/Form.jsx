@@ -53,15 +53,21 @@ const Form = ({movie}) => {
     }
 
     return (
-        <form style={{display: "inline-grid"}}>
-            <input type="text" placeholder={"Titre"} defaultValue={movieData && movieData.title} ref={title}/>
-            <input type="date" placeholder={"Date"} defaultValue={movieData && movieData.release_date}
+        <form id={"form"}>
+            <label>Titre</label>
+            <input type="text"  defaultValue={movieData && movieData.title} ref={title}/>
+            <label>Date de sortie</label>
+            <input type="date"  defaultValue={movieData && movieData.release_date}
                    ref={release_date}/>
-            <input type="text" placeholder={"Catégories"} ref={categoriesArray}/>
-            <input type="textarea" placeholder={"Description"} defaultValue={movieData && movieData.overview}
+            <label>Catégories</label>
+            <input type="text" placeholder={"action, aventure, comédie, ..."} ref={categoriesArray}/>
+            <label>Description</label>
+            <input type="textarea"  defaultValue={movieData && movieData.overview}
                    ref={description}/>
-            <input type="url" placeholder={"Poster"} defaultValue={movieData && movieData.poster_path} ref={poster}/>
-            <input type="url" placeholder={"Backdrop"} defaultValue={movieData && movieData.backdrop_path}
+            <label>Affiche</label>
+            <input type="url" defaultValue={movieData && movieData.poster_path} ref={poster}/>
+            <label>Backdrop</label>
+            <input type="url" defaultValue={movieData && movieData.backdrop_path}
                    ref={backdrop}/>
 
             <label>Acteurs:</label>

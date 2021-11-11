@@ -1,0 +1,41 @@
+#addMovie {
+    display: grid;
+}
+
+#form {
+    display: inline-grid;
+    margin: auto;
+}
+
+#form input {
+    border: 1px solid #b9b9b9;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin: 10px 0;
+    height: 35px;
+}
+
+#form label {
+    margin-top: 20px;
+}
+
+#form svg {
+    font-size: 40px;
+    color: green;
+    cursor: pointer;
+}
+
+#form button {
+    color: white;
+    background-color: #a970ff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #a970ff;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+#form button:hover {
+    color: #a970ff;
+    background-color: white;
+}

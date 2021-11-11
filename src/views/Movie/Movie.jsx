@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Title from "../../components/Title/Title";
 import {useParams} from "react-router-dom";
 import moviesService from "../../services/moviesService";
-import Card from "../../components/Card/Card";
 
 const Movie = () => {
 
