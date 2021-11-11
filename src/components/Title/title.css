@@ -1,0 +1,11 @@
+.title {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.title-decoration {
+    background: #a970ff;
+    height: 12px;
+    width: 100px;
+    border-radius: 30px;
+}

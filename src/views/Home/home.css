@@ -1,0 +1,32 @@
+#allCardMovie {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#search {
+    height: 45px;
+    display: flex;
+    margin: 40px 0;
+    justify-content: center;
+}
+
+#search input {
+    border: 1px solid #b9b9b9;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+}
+
+#search button {
+    width: 70px;
+    background-color: #a970ff;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#search svg {
+    font-size: 27px;
+    color: white;
+}

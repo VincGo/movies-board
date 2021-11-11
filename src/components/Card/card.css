@@ -1,0 +1,27 @@
+.cardMovie {
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.cardMovie img {
+    width: 300px;
+}
+
+.cardTitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.cardDate {
+    color: #c2c2c2;
+    font-size: 12px;
+    margin-top: 0;
+}
+
+.cardMovie:hover .cardDescription {
+    color: #a970ff;
+}

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Title from "../components/Title";
+import Title from "../components/Title/Title";
 import moviesService from "../services/moviesService";
 import Form from "../components/form/Form";
 
