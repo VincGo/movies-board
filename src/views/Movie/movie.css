@@ -1,0 +1,33 @@
+#moviePresentation {
+    display: flex;
+    margin-top: 20px;
+}
+
+#movie h2 {
+    margin-top: 40px;
+}
+
+#movie img {
+    height: 265px;
+}
+
+#moviePresentationText {
+    margin-left: 10px;
+}
+
+#moviePresentationText span {
+    color: #b3b3b3;
+}
+
+#movie section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#movie section p {
+    margin: 0 0 5px 0
+}
+
+#movie section div {
+    margin-right: 20px;
+}

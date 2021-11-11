@@ -2,7 +2,7 @@
 @import "components/Title/title.css";
 @import "components/Card/card.css";
 @import "views/Home/home.css";
-
+@import "views/Movie/movie.css";
 main {
     max-width: 1000px;
     margin: auto;

@@ -1,7 +1,7 @@
 import './App.css';
 import Home from "./views/Home/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Movie from "./views/Movie";
+import Movie from "./views/Movie/Movie";
 import Add from "./views/Add";
 import NavBar from "./components/NavBar/NavBar";
 
