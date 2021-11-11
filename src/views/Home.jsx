@@ -9,7 +9,8 @@ const Home = () => {
 
     useEffect(() => {
         moviesService.showAllMovies()
-            .then((data) => setMovies(data))
+            //.then((data) => setMovies(data))
+            .then((data) => console.log(data))
             .catch((err) => console.log(err))
     }, [])
 
