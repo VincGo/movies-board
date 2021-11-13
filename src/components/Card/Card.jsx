@@ -11,7 +11,7 @@ const Card = ({movie}) => {
             <img src={movie.poster} alt={movie.title}/>
             <p className={"cardTitle"}>{movie.title}</p>
             <p className={"cardDate"}>{dataFr}</p>
-            <p className={"cardDescription"}>{overview} ...</p>
+            {overview && <p className={"cardDescription"}>{overview} ...</p>}
             <button>Modifier</button>
             <button>Supprimer</button>
         </a>

@@ -30,7 +30,8 @@ const Movie = () => {
             </div>
             <h2>Synopsis</h2>
             <p>{movie.description}</p>
-            <h2>Films similaires</h2>
+            <p>{!movie.description && "Il n'y a pas de résumé pour ce film pour le moment."}</p>
+            {!movie.similar_movies && <h2>Films similaires</h2>}
             <section>
                 {movie.similar_movies && movie.similar_movies.map((similar, index) =>
                     <div key={index}>
