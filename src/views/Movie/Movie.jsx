@@ -13,7 +13,7 @@ const Movie = () => {
         moviesService.show(id)
             .then((data) => setMovie(data))
             .catch((err) => console.log(err))
-    }, [])
+    }, [id])
 
     return (
         <div id={"movie"}>

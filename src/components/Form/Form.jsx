@@ -1,33 +1,30 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useRef, useState} from 'react';
 import moviesService from "../../services/moviesService";
 import ActorsForm from "./ActorsForm";
 import SimilarMovieForm from "./SimilarMovieForm";
+import Categories from "./Categories";
 
 const Form = ({movie}) => {
-    const [movieData, setMovieData] = useState("")
     const [actorsData, setActorsData] = useState([])
     const [similarMovie, setSimilarMovie] = useState([])
+    const [categoriesData, setCategoriesData] = useState(null)
 
     const title = useRef()
     const release_date = useRef()
-    const categoriesArray = useRef()
     const description = useRef()
     const poster = useRef()
     const backdrop = useRef()
 
-    useEffect(() => {
-        setMovieData(movie)
-    }, [movie])
+    const poster_path = movie.poster ? "https://image.tmdb.org/t/p/w500" + movie.poster : ""
+    const backdrop_path = movie.backdrop ? "https://image.tmdb.org/t/p/w500" + movie.backdrop : ""
 
     //Ajoute un film dans la DB
     function sendForm(e) {
-        const categories = categoriesArray.current.value.split(",")
-
         //Création d'un objet avec les données du film
         const data = {
             title: title.current.value,
             release_date: release_date.current.value,
-            categories: categories,
+            categories: categoriesData,
             description: description.current.value,
             poster: poster.current.value,
             backdrop: backdrop.current.value,
@@ -52,29 +49,32 @@ const Form = ({movie}) => {
         setSimilarMovie(data)
     }
 
+    function getCategoriesData (data) {
+        setCategoriesData(data)
+    }
+
     return (
         <form id={"form"}>
             <label>Titre</label>
-            <input type="text"  defaultValue={movieData && movieData.title} ref={title}/>
+            <input type="text" defaultValue={movie && movie.title} ref={title}/>
             <label>Date de sortie</label>
-            <input type="date"  defaultValue={movieData && movieData.release_date}
+            <input type="date" defaultValue={movie && movie.release_date}
                    ref={release_date}/>
-            <label>Catégories</label>
-            <input type="text" placeholder={"action, aventure, comédie, ..."} ref={categoriesArray}/>
+
+            <Categories movie_id={movie.id} categoriesData={getCategoriesData}/>
+
             <label>Description</label>
-            <input type="textarea"  defaultValue={movieData && movieData.overview}
-                   ref={description}/>
+            <textarea ref={description} defaultValue={movie && movie.overview}/>
             <label>Affiche</label>
-            <input type="url" defaultValue={movieData && movieData.poster_path} ref={poster}/>
+            <input type="url" defaultValue={movie && poster_path} ref={poster}/>
             <label>Backdrop</label>
-            <input type="url" defaultValue={movieData && movieData.backdrop_path}
-                   ref={backdrop}/>
+            <input type="url" defaultValue={movie && backdrop_path} ref={backdrop}/>
 
             <label>Acteurs:</label>
-            <ActorsForm actorsData={getActorsData}/>
+            <ActorsForm actorsData={getActorsData} movie_id={movie.id}/>
 
             <label htmlFor="similarMovies">Films similaires:</label>
-            <SimilarMovieForm similarMovieData={getSimilarMovieData}/>
+            <SimilarMovieForm similarMovieData={getSimilarMovieData} movie_id={movie.id}/>
 
             <button onClick={sendForm}>Valider</button>
         </form>

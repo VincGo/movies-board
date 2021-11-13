@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import produce from "immer";
 import { IoIosAddCircle } from "react-icons/io";
+import moviesService from "../../services/moviesService";
 
-const SimilarMovieForm = ({similarMovieData}) => {
-    const [similarMovie, setSimilarMovie] = useState([{
-        title: "",
-        poster: "",
-        release_date: ""
-    }])
+const SimilarMovieForm = ({similarMovieData, movie_id}) => {
+    const [similarMovie, setSimilarMovie] = useState([])
 
     //Ajouts de novueaux champs pour la création d'acteur
     function newSimilarMovie(e) {
@@ -22,7 +19,25 @@ const SimilarMovieForm = ({similarMovieData}) => {
 
     useEffect(() => {
         similarMovieData(similarMovie)
-    }, [similarMovie])
+    }, [similarMovieData,similarMovie])
+
+    useEffect(() => {
+        moviesService.getSimilarsMovies(movie_id)
+            .then((data) => {
+                const arr = []
+                const similar = data.results
+                if(similar.length > 0) {
+                    for (let i = 0; i < 4; i++) {
+                        arr.push({
+                            title: similar[i].title,
+                            poster: "https://image.tmdb.org/t/p/w500" + similar[i].poster_path,
+                            release_date: similar[i].release_date
+                        })
+                    }
+                    setSimilarMovie(arr)
+                }
+            })
+    })
 
     return (
         <div>
@@ -34,7 +49,7 @@ const SimilarMovieForm = ({similarMovieData}) => {
                             v[index].title = title
                         }))
                     }}/>
-                    <input type="url" placeholder={"Affiche"} defaultValue={a.poster} onChange={e => {
+                    <input type="url" placeholder={"Affiche"} required={false} defaultValue={a.poster} onChange={e => {
                         const poster = e.target.value
                         setSimilarMovie(currentSimilarMovie => produce(currentSimilarMovie, v => {
                             v[index].poster = poster

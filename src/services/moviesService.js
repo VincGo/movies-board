@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const API_KEY = "e15c129d8401459ccb452e300c98cc83"
+
 const moviesService = {
     //Affiche tous les films de la DB
     showAllMovies() {
@@ -20,8 +22,32 @@ const moviesService = {
     //Récupère les films via l'API themoviedb
     getDataMovie(title, date_release) {
         return axios
-            .get(`https://api.themoviedb.org/3/search/movie?api_key=e15c129d8401459ccb452e300c98cc83&page=1&language=fr&query=${title}&primary_release_year=${date_release}`)
+            .get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&page=1&language=fr&query=${title}&primary_release_year=${date_release}`)
             .then((response) => response.data.results)
+            .catch((err) => console.log(err))
+    },
+
+    //Récupère les catégoris d'un film
+    getCategoriesMovie (movie_id) {
+        return axios
+            .get(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}&language=fr`)
+            .then((response) => response.data)
+            .catch((err) => console.log(err))
+    },
+
+    //Récupère les acteurs d'un film
+    getActorsMovie (movie_id) {
+        return axios
+            .get(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${API_KEY}&language=fr`)
+            .then((response) => response.data)
+            .catch((err) => console.log(err))
+    },
+
+    //Récupère les films similaires d'un film
+    getSimilarsMovies (movie_id) {
+        return axios
+            .get(`https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=${API_KEY}&language=fr&page=1`)
+            .then((response) => response.data)
             .catch((err) => console.log(err))
     },
 

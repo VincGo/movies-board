@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import produce from "immer";
 import { IoIosAddCircle } from "react-icons/io";
+import moviesService from "../../services/moviesService";
 
 
-const ActorsForm = ({actorsData}) => {
-    const [actors, setActors] = useState([{
-        name: "",
-        photo: "",
-        character: ""
-    }])
+const ActorsForm = ({actorsData, movie_id}) => {
+    const [actors, setActors] = useState([])
 
     //Ajouts de novueaux champs pour la création d'acteur
     function newActor(e) {
@@ -23,7 +20,23 @@ const ActorsForm = ({actorsData}) => {
 
     useEffect(() => {
         actorsData(actors)
-    }, [actors])
+    }, [actorsData, actors])
+
+    useEffect(() => {
+        moviesService.getActorsMovie(movie_id)
+            .then((data) => {
+                const arr = []
+                const cast = data.cast
+                for (let i=0; i< 5; i++) {
+                    arr.push({
+                        name: cast[i].name,
+                        photo: "https://image.tmdb.org/t/p/w500" + cast[i].profile_path,
+                        character: cast[i].character
+                    })
+                }
+                setActors(arr)
+            })
+    }, [movie_id])
 
     return (
         <div>
