@@ -4,10 +4,12 @@ import {useParams} from "react-router-dom";
 import moviesService from "../../services/moviesService";
 
 const Movie = () => {
-
     //Récupère l'id dans l'url
     const {id} = useParams()
     const [movie, setMovie] = useState([])
+
+    const d = new Date(movie.release_date)
+    const dataFr = d.toLocaleDateString('fr')
 
     useEffect(() => {
         moviesService.show(id)
@@ -21,7 +23,7 @@ const Movie = () => {
             <div id={"moviePresentation"}>
                 <img src={movie.poster} alt={movie.title}/>
                 <div id={"moviePresentationText"}>
-                    <p><span>Date de sortie: </span>{movie.release_date}</p>
+                    <p><span>Date de sortie: </span>{dataFr}</p>
                     <p><span>Acteurs: </span>{movie.actors && movie.actors.map((actor) => actor.name + ', ')}</p>
                     <p><span>Catégories: </span>{movie.categories && movie.categories.map((category) => category + ', ')}</p>
                 </div>
