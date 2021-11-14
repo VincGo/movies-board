@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import Title from "../../components/Title/Title";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import moviesService from "../../services/moviesService";
 import Delete from "../../components/Delete/Delete";
+import {IoIosCreate} from "react-icons/io";
 
 const Movie = () => {
     //Récupère l'id dans l'url
@@ -11,6 +12,8 @@ const Movie = () => {
 
     const d = new Date(movie.release_date)
     const dataFr = d.toLocaleDateString('fr')
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         moviesService.show(id)
@@ -42,7 +45,13 @@ const Movie = () => {
                     </div>
                 )}
             </section>
-            <Delete id={id} />
+            <div className={"updateDelete"}>
+                <IoIosCreate onClick={(e) => {
+                    e.preventDefault()
+                    navigate(`/edit/${movie.id}`)
+                }}/>
+                <Delete id={movie.id}/>
+            </div>
         </div>
     );
 };
