@@ -82,8 +82,15 @@ const moviesService = {
             .put(`http://localhost:3000/movies/${id}`, movie)
             .then((response) => response.data)
             .catch((err) => console.log(err))
-    }
+    },
 
+    //Récupère toutes les catégories pour le filtre de la home
+    getAllCategories() {
+        return axios
+            .get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=fr`)
+            .then((response) => response.data)
+            .catch((err) => console.log(err))
+    }
 }
 
 export default moviesService;

@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-#search input {
+#search input, select {
     border: 1px solid #b9b9b9;
     border-radius: 10px;
     padding-left: 10px;
