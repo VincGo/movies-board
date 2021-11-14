@@ -1,7 +1,6 @@
 #allCardMovie {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 /* FORM : HOME - ADDFORM*/
