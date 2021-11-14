@@ -27,15 +27,18 @@ const ActorsForm = ({actorsData, movie_id}) => {
                 .then((data) => {
                     const arr = []
                     const cast = data.cast
-                    for (let i=0; i< 5; i++) {
-                        arr.push({
-                            name: cast[i].name,
-                            photo: "https://image.tmdb.org/t/p/w500" + cast[i].profile_path,
-                            character: cast[i].character
-                        })
+                    if(cast.length > 0) {
+                        for (let i=0; i< 5; i++) {
+                            arr.push({
+                                name: cast[i].name,
+                                photo: "https://image.tmdb.org/t/p/w500" + cast[i].profile_path,
+                                character: cast[i].character
+                            })
+                        }
                     }
                     setActors(arr)
                 })
+                .catch((err) => console.log(err))
         } else {
             if(movie_id) {
                 moviesService.show(movie_id)
