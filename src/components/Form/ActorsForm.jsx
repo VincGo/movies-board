@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import produce from "immer";
-import { IoIosAddCircle } from "react-icons/io";
+import { IoIosAddCircle, IoIosCloseCircle } from "react-icons/io";
 import moviesService from "../../services/moviesService";
 
 const ActorsForm = ({actorsData, movie_id}) => {
@@ -48,7 +48,7 @@ const ActorsForm = ({actorsData, movie_id}) => {
     return (
         <div>
             {actors.map((a, index) =>
-                <div key={index}>
+                <div key={index} className={"input"}>
                     <input type="text" placeholder={"Nom de l'acteur"} defaultValue={a.name} onChange={e => {
                         const name = e.target.value
                         setActors(currentActor => produce(currentActor, v => {
@@ -67,7 +67,12 @@ const ActorsForm = ({actorsData, movie_id}) => {
                             v[index].character = character
                         }))
                     }}/>
+                    <IoIosCloseCircle onClick={(e) => {
+                        e.preventDefault()
+                        setActors(currentActors => currentActors.filter(x => x.name !== a.name))
+                    }}/>
                 </div>
+
             )}
             <IoIosAddCircle onClick={newActor}/>
         </div>

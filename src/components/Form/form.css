@@ -39,3 +39,13 @@
     color: #a970ff;
     background-color: white;
 }
+
+.input {
+    display: flex;
+}
+
+.input > svg{
+    color: red!important;
+    font-size: 30px!important;
+    margin: auto 0;
+}

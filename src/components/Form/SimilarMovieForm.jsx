@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import produce from "immer";
-import {IoIosAddCircle} from "react-icons/io";
+import {IoIosAddCircle, IoIosCloseCircle} from "react-icons/io";
 import moviesService from "../../services/moviesService";
 
 const SimilarMovieForm = ({similarMovieData, movie_id}) => {
@@ -50,7 +50,7 @@ const SimilarMovieForm = ({similarMovieData, movie_id}) => {
     return (
         <div>
             {similarMovie.map((a, index) =>
-                <div key={index}>
+                <div key={index} className={"input"}>
                     <input type="text" placeholder={"Titre du film"} defaultValue={a.title} onChange={e => {
                         const title = e.target.value
                         setSimilarMovie(currentSimilarMovie => produce(currentSimilarMovie, v => {
@@ -68,6 +68,10 @@ const SimilarMovieForm = ({similarMovieData, movie_id}) => {
                         setSimilarMovie(currentSimilarMovie => produce(currentSimilarMovie, v => {
                             v[index].release_date = release_date
                         }))
+                    }}/>
+                    <IoIosCloseCircle onClick={(e) => {
+                        e.preventDefault()
+                        setSimilarMovie(currentActors => currentActors.filter(x => x.title !== a.title))
                     }}/>
                 </div>
             )}
