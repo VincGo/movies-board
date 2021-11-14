@@ -14,28 +14,38 @@ const Form = ({movie}) => {
     const description = useRef()
     const poster = useRef()
     const backdrop = useRef()
-
-    const poster_path = movie.poster ? "https://image.tmdb.org/t/p/w500" + movie.poster : ""
-    const backdrop_path = movie.backdrop ? "https://image.tmdb.org/t/p/w500" + movie.backdrop : poster_path
+    //const poster_path = movie.poster ? "https://image.tmdb.org/t/p/w500" + movie.poster : ""
+    //const backdrop_path = movie.backdrop ? "https://image.tmdb.org/t/p/w500" + movie.backdrop : poster_path
 
     //Ajoute un film dans la DB
     function sendForm(e) {
         //Création d'un objet avec les données du film
+
+        const posterString = poster.current.value.substring(0, 1)
+        const backdropString = backdrop.current.value.substring(0, 1)
+
         const data = {
             title: title.current.value,
             release_date: release_date.current.value,
             categories: categoriesData,
             description: description.current.value,
-            poster: poster.current.value,
-            backdrop: backdrop.current.value,
+            poster: posterString === "/" ? "https://image.tmdb.org/t/p/w500" + poster.current.value : poster.current.value,
+            backdrop: backdropString === "/" ? "https://image.tmdb.org/t/p/w500" + backdrop.current.value : backdrop.current.value,
             actors: actorsData,
             similar_movies: similarMovie
         }
 
-        moviesService.add(data)
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err))
+        console.log(data)
 
+        if(window.location.pathname === "/ajout-d-un-film") {
+            moviesService.add(data)
+                .then((data) => console.log(data))
+                .catch((err) => console.log(err))
+        } else {
+            moviesService.edit(movie.id, data)
+                .then(() => console.log("success"))
+                .catch((err) => console.log(err))
+        }
         e.preventDefault()
     }
 
@@ -61,14 +71,14 @@ const Form = ({movie}) => {
             <input type="date" defaultValue={movie && movie.release_date}
                    ref={release_date}/>
 
-            <Categories movie_id={movie.id} categoriesData={getCategoriesData}/>
+           <Categories movie_id={movie.id} categoriesData={getCategoriesData} />
 
             <label>Description</label>
-            <textarea ref={description} defaultValue={movie && movie.overview}/>
+            <textarea ref={description} defaultValue={movie.overview || movie.description}/>
             <label>Affiche</label>
-            <input type="url" defaultValue={movie && poster_path} ref={poster}/>
+            <input type="url" defaultValue={movie && movie.poster} ref={poster}/>
             <label>Backdrop</label>
-            <input type="url" defaultValue={movie && backdrop_path} ref={backdrop}/>
+            <input type="url" defaultValue={movie && movie.backdrop} ref={backdrop}/>
 
             <label>Acteurs:</label>
             <ActorsForm actorsData={getActorsData} movie_id={movie.id}/>

@@ -7,7 +7,24 @@ const Categories = ({movie_id, categoriesData}) => {
     const category = categories.map((c) => c)
 
     useEffect(() => {
-        getCategoriesMovie(movie_id)
+        if(window.location.pathname === "/ajout-d-un-film") {
+            moviesService.getCategoriesMovie(movie_id)
+                .then((data) => {
+                    const arr = []
+                    for (let i=0; i<data.genres.length; i++) {
+                        arr.push(data.genres[i].name)
+                    }
+                    setCategories(arr)
+                })
+                .catch((err) => console.log(err))
+        } else {
+            if(movie_id) {
+                moviesService.show(movie_id)
+                    .then((data) => setCategories(data.categories))
+                    .catch((err) => console.log(err))
+            }
+        }
+
     }, [movie_id])
 
     useEffect(() => {
@@ -19,18 +36,6 @@ const Categories = ({movie_id, categoriesData}) => {
         setCategories(categories)
     }
 
-    //Récupère les catégories d'un film via l'ID du film
-    function getCategoriesMovie(movies_id) {
-        moviesService.getCategoriesMovie(movies_id)
-            .then((data) => {
-                const arr = []
-                for (let i=0; i<data.genres.length; i++) {
-                    arr.push(data.genres[i].name)
-                }
-                setCategories(arr)
-            })
-            .catch((err) => console.log(err))
-    }
     return (
         <>
             <label>Catégories</label>

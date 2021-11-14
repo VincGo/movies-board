@@ -74,7 +74,16 @@ const moviesService = {
             .delete(`http://localhost:3000/movies/${id}`)
             .then((response) => response.data)
             .catch((err) => console.log(err))
+    },
+
+    //Modification d'un film
+    edit(id, movie) {
+        return axios
+            .put(`http://localhost:3000/movies/${id}`, movie)
+            .then((response) => response.data)
+            .catch((err) => console.log(err))
     }
+
 }
 
 export default moviesService;

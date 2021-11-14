@@ -1,5 +1,7 @@
 import React from 'react';
 import Delete from "../Delete/Delete";
+import { IoIosCreate } from "react-icons/io";
+import {useNavigate} from "react-router-dom";
 
 const Card = ({movie, delete_id}) => {
     //limiter la taille de la description
@@ -7,6 +9,7 @@ const Card = ({movie, delete_id}) => {
     //changer le format de la date (dd/mm/yyyy)
     const d = new Date(movie.release_date)
     const dataFr = d.toLocaleDateString('fr')
+    const navigate = useNavigate()
 
     function getId(id) {
         delete_id(id)
@@ -19,7 +22,10 @@ const Card = ({movie, delete_id}) => {
             <p className={"cardDate"}>{dataFr}</p>
             {overview && <p className={"cardDescription"}>{overview} ...</p>}
             <div className={"updateDelete"}>
-                <button>Modifier</button>
+                <IoIosCreate onClick={(e) => {
+                    e.preventDefault()
+                    navigate(`/edit/${movie.id}`)
+                }}/>
                 <Delete id={movie.id} delete_id={getId}/>
             </div>
         </a>

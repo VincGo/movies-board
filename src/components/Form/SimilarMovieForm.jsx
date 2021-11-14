@@ -1,43 +1,51 @@
 import React, {useEffect, useState} from 'react';
 import produce from "immer";
-import { IoIosAddCircle } from "react-icons/io";
+import {IoIosAddCircle} from "react-icons/io";
 import moviesService from "../../services/moviesService";
 
 const SimilarMovieForm = ({similarMovieData, movie_id}) => {
     const [similarMovie, setSimilarMovie] = useState([])
 
-    //Ajouts de novueaux champs pour la création d'acteur
+    //Ajouts de nouveaux champs pour la création d'acteur
     function newSimilarMovie(e) {
         setSimilarMovie(currentSimilarMovie => [...currentSimilarMovie, {
             title: "",
             poster: "",
             release_date: ""
         }])
-
         e.preventDefault()
     }
 
     useEffect(() => {
         similarMovieData(similarMovie)
-    }, [similarMovieData,similarMovie])
+    }, [similarMovieData, similarMovie])
 
     useEffect(() => {
-        moviesService.getSimilarsMovies(movie_id)
-            .then((data) => {
-                const arr = []
-                const similar = data.results
-                if(similar.length > 0) {
-                    for (let i = 0; i < 4; i++) {
-                        arr.push({
-                            title: similar[i].title,
-                            poster: "https://image.tmdb.org/t/p/w500" + similar[i].poster_path,
-                            release_date: similar[i].release_date
-                        })
+        if (window.location.pathname === "/ajout-d-un-film") {
+            moviesService.getSimilarsMovies(movie_id)
+                .then((data) => {
+                    const arr = []
+                    const similar = data.results
+                    if (similar.length > 0) {
+                        for (let i = 0; i < 4; i++) {
+                            arr.push({
+                                title: similar[i].title,
+                                poster: "https://image.tmdb.org/t/p/w500" + similar[i].poster_path,
+                                release_date: similar[i].release_date
+                            })
+                        }
+                        setSimilarMovie(arr)
                     }
-                    setSimilarMovie(arr)
-                }
-            })
-    })
+                })
+                .catch((err) => console.log(err))
+        } else {
+            if (movie_id) {
+                moviesService.show(movie_id)
+                    .then((data) => setSimilarMovie(data.similar_movies))
+                    .catch((err) => console.log(err))
+            }
+        }
+    }, [movie_id])
 
     return (
         <div>
