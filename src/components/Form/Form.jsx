@@ -16,7 +16,7 @@ const Form = ({movie}) => {
     const backdrop = useRef()
 
     const poster_path = movie.poster ? "https://image.tmdb.org/t/p/w500" + movie.poster : ""
-    const backdrop_path = movie.backdrop ? "https://image.tmdb.org/t/p/w500" + movie.backdrop : ""
+    const backdrop_path = movie.backdrop ? "https://image.tmdb.org/t/p/w500" + movie.backdrop : poster_path
 
     //Ajoute un film dans la DB
     function sendForm(e) {

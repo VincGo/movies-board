@@ -1,0 +1,13 @@
+.delete svg {
+    font-size: 30px;
+    transition: all .2s;
+    color: #c2c2c2;
+}
+
+.delete svg:first-child:hover {
+    color: green;
+}
+
+.delete svg:last-child:hover {
+    color: red;
+}

@@ -14,6 +14,11 @@ const Home = () => {
             .catch((err) => console.log(err))
     }, [])
 
+    function deleteCard(delete_id) {
+        const newMoviesArr = movies.filter(m => m.id !== delete_id)
+        setMovies(newMoviesArr)
+    }
+
     return (
         <div>
             <Title title={"Affichage de tous les films"}/>
@@ -24,7 +29,7 @@ const Home = () => {
                 <button><IoIosSearch /></button>
             </form>
             <div id={"allCardMovie"}>
-                {movies && movies.map((movie) => <Card key={movie.id} movie={movie}/>)}
+                {movies && movies.map((movie) => <Card key={movie.id} movie={movie} delete_id={deleteCard}/>)}
             </div>
         </div>
     );

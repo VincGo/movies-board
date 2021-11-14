@@ -4,9 +4,13 @@
 @import "views/Home/home.css";
 @import "views/Movie/movie.css";
 @import "components/Form/form.css";
-
+@import "components/Delete/delete.css";
 
 main {
     max-width: 1000px;
     margin: auto;
+}
+
+.updateDelete {
+    display: flex;
 }

@@ -66,6 +66,14 @@ const moviesService = {
             })
             .then((response) => response.data)
             .catch((err) => console.log(err))
+    },
+
+    //Supprimer un film
+    removeMovie(id) {
+        return axios
+            .delete(`http://localhost:3000/movies/${id}`)
+            .then((response) => response.data)
+            .catch((err) => console.log(err))
     }
 }
 

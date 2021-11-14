@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Title from "../../components/Title/Title";
 import {useParams} from "react-router-dom";
 import moviesService from "../../services/moviesService";
+import Delete from "../../components/Delete/Delete";
 
 const Movie = () => {
     //Récupère l'id dans l'url
@@ -41,6 +42,7 @@ const Movie = () => {
                     </div>
                 )}
             </section>
+            <Delete id={id} />
         </div>
     );
 };
