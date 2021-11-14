@@ -3,6 +3,7 @@ import moviesService from "../../services/moviesService";
 import ActorsForm from "./ActorsForm";
 import SimilarMovieForm from "./SimilarMovieForm";
 import Categories from "./Categories";
+import {useNavigate} from "react-router-dom";
 
 const Form = ({movie}) => {
     const [actorsData, setActorsData] = useState([])
@@ -14,8 +15,8 @@ const Form = ({movie}) => {
     const description = useRef()
     const poster = useRef()
     const backdrop = useRef()
-    //const poster_path = movie.poster ? "https://image.tmdb.org/t/p/w500" + movie.poster : ""
-    //const backdrop_path = movie.backdrop ? "https://image.tmdb.org/t/p/w500" + movie.backdrop : poster_path
+
+    const navigate = useNavigate()
 
     //Ajoute un film dans la DB
     function sendForm(e) {
@@ -35,15 +36,13 @@ const Form = ({movie}) => {
             similar_movies: similarMovie
         }
 
-        console.log(data)
-
         if(window.location.pathname === "/ajout-d-un-film") {
             moviesService.add(data)
-                .then((data) => console.log(data))
+                .then(() => navigate("/"))
                 .catch((err) => console.log(err))
         } else {
             moviesService.edit(movie.id, data)
-                .then(() => console.log("success"))
+                .then(() => navigate("/"))
                 .catch((err) => console.log(err))
         }
         e.preventDefault()
