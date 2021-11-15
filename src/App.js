@@ -5,6 +5,7 @@ import Movie from "./views/Movie/Movie";
 import Add from "./views/Add";
 import NavBar from "./components/NavBar/NavBar";
 import Edit from "./views/Edit/Edit";
+import Footer from "./components/Footer/Footer";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path={"/edit/:id"} element={<Edit />} />
                 </Routes>
             </main>
+            <Footer />
         </BrowserRouter>
     );
 }

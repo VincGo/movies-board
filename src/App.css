@@ -6,10 +6,12 @@
 @import "components/Form/form.css";
 @import "components/Delete/delete.css";
 @import "views/Edit/edit.css";
+@import "components/Footer/footer.css";
 
 main {
     max-width: 1000px;
     margin: auto;
+    min-height: 65vh;
 }
 
 .updateDelete {
