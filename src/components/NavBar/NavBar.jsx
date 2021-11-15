@@ -6,7 +6,7 @@ const NavBar = () => {
         <nav>
             <ol>
                 <Link to={"/"}>MoviesBoard</Link>
-                <Link to={"/ajout-d-un-film"}>Ajouter d'un film </Link>
+                <Link to={"/ajout-d-un-film"}>Ajouter un film </Link>
             </ol>
         </nav>
     );

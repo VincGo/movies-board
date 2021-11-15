@@ -54,7 +54,7 @@ const Home = () => {
 
     return (
         <div>
-            <Title title={"Affichage de tous les films"}/>
+            <Title title={"Liste des films"}/>
             <form id={"search"}>
                 <input type="text" placeholder={"Titre du film"} ref={title}/>
                 <input type="date" ref={date}/>
